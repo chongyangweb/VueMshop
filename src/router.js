@@ -8,7 +8,15 @@ import Index from '@/views/index.vue' // 首页
 import Shops from '@/views/Shop/shops.vue' // 店铺列表
 import ShopIndex from '@/views/Shop/index.vue' // 店铺首页
 
-// import List from './views/list.vue'
+// 商品
+import Goods from '@/views/Goods/index.vue' // 商品
+
+// 用户中心
+import User from '@/views/User/index.vue' // 用户中心
+import Register from '@/views/User/register.vue' // 注册
+import Login from '@/views/User/login.vue' // 登录
+
+
 
 Vue.use(Router)
 
@@ -41,7 +49,13 @@ export default new Router({
     {path: '/shop/list',name: 'shops',component: Shops},// 店铺列表
     {path: '/shop/:id',name: 'shop_index',component: ShopIndex},// 店铺列表
 
-    
+    // 商品
+    {path: '/goods/:id',name: 'goods_index',component: Goods},// 商品详情
+
+    // 用户中心
+    {path: '/user',name: 'user_index',component: User},
+    {path: '/user/register',name: 'user_register',component: Register},
+    {path: '/user/login',name: 'user_login',component: Login},
     
   ]
 })

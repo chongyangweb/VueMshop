@@ -13,6 +13,12 @@ Icon,
 Tab,
 Tabs,
 Rate,
+GoodsAction,
+GoodsActionIcon,
+GoodsActionButton,
+Cell,
+CellGroup,
+Field,
 
 } from 'vant';
 Vue.use(Button);
@@ -28,4 +34,10 @@ Vue.use(Icon);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Rate);
+Vue.use(GoodsAction);
+Vue.use(GoodsActionIcon);
+Vue.use(GoodsActionButton);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(Field);
 
