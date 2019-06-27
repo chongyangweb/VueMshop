@@ -189,4 +189,10 @@ export function isWeiXin() {
   return false;
   }
 }
- //Vue.use(axios)
+export function getLocation(){ 
+  if (navigator.geolocation){ 
+    return true;
+  }else{ 
+    return false;
+  } 
+} 

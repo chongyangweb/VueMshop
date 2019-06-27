@@ -1,7 +1,10 @@
 <template>
 	<div class="shop">
-		<div class="shops_top_banner">
-			<div @click="$router.go(-1)" class="back_bg">
+		<div class="goods_info_top">
+			<van-swipe :autoplay="3000" indicator-color="white" :height="200">
+			  <van-swipe-item v-for="v in shop_info.images.split(',')"><img :src="v"  height="200px" style="display:block;margin:0 auto;"></van-swipe-item>
+			</van-swipe>
+			<div @click="$router.go(-1)" class="back_bg2">
 				<van-icon name="arrow-left" /> <!-- <font>返回</font> -->
 			</div>
 		</div>
@@ -9,10 +12,10 @@
 		<!-- 店铺名字 -->
 		<div class="shop_index_name">
 			<div class="shop_index_avatar">
-				<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1561278075&di=b3dff61f577cde1d2e7b754891d69ac7&src=http://img5.duitang.com/uploads/item/201303/11/20130311195959_QT3t2.thumb.700_0.jpeg" width="60px" height="60px">
+				<img :src="shop_info.logo" width="60px" height="60px">
 			</div>
 			<div class="shop_index_other">
-				<div class="shop_index_names">宁乡市圣玛岚琪布艺旗舰店</div>
+				<div class="shop_index_names">{{shop_info.title}}</div>
 				<div class="shop_index_rate">
 					<van-rate
 					  v-model="rate"
@@ -49,17 +52,28 @@
 		data(){
 			return{
 				rate:5,
+				shop_info:{},
 			}
+		},
+		methods:{
+			get_shop_info:function(){
+				var _this = this;
+				this.$post(this.ROOT_URL + 'ShopApi/goods/get_shop_info',{id:this.$route.params.id}).then(function(res){
+					_this.shop_info = res.data.info;
+				});
+			},
+		},
+		mounted(){
+			this.get_shop_info();
 		},
 
 	};
 </script>
 
 <style>
-.shops_top_banner{height: 160px;position: relative;/*background: url('http://s.qingwuit.com/Uploads/2019_06_01/15593806351611.jpg');*/background-position: top center;color:#fff;font-size: 16px;padding-top: 1rem;padding-left: 1rem;box-sizing: border-box;display: block;background-color: #ff6d77;}
-.back_bg{height: 2rem;width: 2rem;border-radius: 50%;padding-top: 0.45rem;padding-left:0.4rem;box-sizing: border-box;background-color:rgba(0,0,0,0.4); /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */}
-/*.shops_top_banner font{font-size: 14px;margin-top: -0.15rem;float: left;}*/
-/*.shops_top_banner .van-icon, .van-icon::before{margin-right: 0.1rem;float: left;}*/
+
+.goods_info_top{position: relative;}
+.back_bg2{height: 2rem;width: 2rem;border-radius: 50%;padding-top: 0.5rem;padding-left:0.5rem;box-sizing: border-box;background-color:rgba(0,0,0,0.4); color:#fff;position: absolute;top: 1rem;left:1rem;}
 .shops_where{text-align: center;line-height: 3rem;}
 /*.shops_where .van-col--8:active{background: #dc0000;color:#fff;}
 .shops_where .van-col--8:visited{background: #dc0000;color:#fff;}*/

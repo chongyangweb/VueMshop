@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
@@ -6,7 +5,7 @@ import './plugins/vant.js'// vant Ui 库
 import '../public/style.css' // 公共类
 import '../public/fonts/iconfont.css' // 公共类
 import {formatDate} from './plugins/function.js' // 辅助js 库
-import {post,get,put,deletes,toJson,isEmpty} from './plugins/http.js' // axios
+import {post,get,put,deletes,toJson,isEmpty,getLocation} from './plugins/http.js' // axios
 import md5 from 'js-md5'; // md5
 
 //定义全局变量
@@ -15,6 +14,7 @@ Vue.prototype.$get=get;
 Vue.prototype.$put=put;
 Vue.prototype.$delete=deletes;
 Vue.prototype.$toJson=toJson;
+Vue.prototype.$getLocation=getLocation;
 Vue.prototype.$isEmpty=isEmpty;
 Vue.prototype.$md5=md5;
 

@@ -2,16 +2,13 @@
 	<div class="shop">
 		<van-search placeholder="请输入搜索关键词" v-model="keywords" />
 		<van-swipe :autoplay="3000" indicator-color="white" :height="180">
-		  <van-swipe-item><img src="http://cdn.68design.net/work/pic/201906/k3u1u1jxwxhbszpkbjcu.jpg"></van-swipe-item>
-		  <van-swipe-item>2</van-swipe-item>
-		  <van-swipe-item>3</van-swipe-item>
-		  <van-swipe-item>4</van-swipe-item>
+		  <van-swipe-item v-for="v in slide"><router-link :to="v.url"><img :src="v.image_url" /></router-link></van-swipe-item>
 		</van-swipe>
 		<div class="xian"></div>
 		<div class="index_nav">
 			<van-row>
 			  <van-col span="6"><div class="index_nav_rand" @click="$router.push({name:'shops'})"><i class="iconfont">&#xe654;</i></div>附近店铺</van-col>
-			  <van-col span="6"><div class="index_nav_rand index_nav_rand2"><i class="iconfont">&#xe8cc;</i></div>特价专区</van-col>
+			  <van-col span="6"><div class="index_nav_rand index_nav_rand2"><i class="iconfont">&#xe8cc;</i></div>免单专区</van-col>
 			  <van-col span="6"><div class="index_nav_rand index_nav_rand3"><i class="iconfont">&#xe606;</i></div>今日免单</van-col>
 			  <van-col span="6"><div class="index_nav_rand index_nav_rand4"><i class="iconfont">&#xe618;</i></div>分销中心</van-col>
 			</van-row>
@@ -21,7 +18,7 @@
 		<!-- // 秒杀 -->
 		<div class="miaosha">
 			<div class="index_block_title">
-				<div class="index_miaosha_title">限时秒杀</div>
+				<div class="index_miaosha_title">限时抢购</div>
 				<div class="index_miaosha_is_start">即将开始</div>
 				<div class="index_miaosha_time"><i class="iconfont">&#xe60a;</i>00:13:59</div>
 			</div>
@@ -64,48 +61,14 @@
 			</div>
 			<div class="index_miaosha_list">
 				<ul>
-					 <li>
+					 <li v-for="v in free_goods_list">
+					 	<router-link :to="{name:'goods_index',params:{id:v.id}}">
 					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-06-26/e9c456d1fc792b3fe47d2afd6f62c8dc.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
+					 		<img :src="v.images.split(',')[0]">
+					 		<p>{{v.title}}</p>
+					 		<p class="miaosha_font_price">￥{{v.get_sku != null?v.get_sku.price:v.price}}</p>
 					 	</div>
-					 	
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-06-23/4b750f88b585e37f0f7d6e24aee12a21.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-10-20/7dc0504720bd814217cce69e7785677f.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-12-11/be9c3dab677cfa8fee0f5c9f4016a059.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-11/e621d8c9f9a1ca947127d94c27db1e70.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
+					 	</router-link>
 					 </li>
 				</ul>
 			</div>
@@ -120,101 +83,24 @@
 			</div>
 			<div class="index_miaosha_list">
 				<ul>
-					 <li>
+					 <li v-for="v in new_goods_list">
 					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-06-26/e9c456d1fc792b3fe47d2afd6f62c8dc.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
+					 		<img :src="v.images.split(',')[0]">
+					 		<p>{{v.title}}</p>
+					 		<p class="miaosha_font_price">￥{{v.get_sku != null?v.get_sku.price:v.price}}</p>
 					 	</div>
 					 	
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-06-23/4b750f88b585e37f0f7d6e24aee12a21.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-10-20/7dc0504720bd814217cce69e7785677f.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2017-12-11/be9c3dab677cfa8fee0f5c9f4016a059.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-11/e621d8c9f9a1ca947127d94c27db1e70.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
-					 </li>
-					 <li>
-					 	<div class="index_miaosha_list_blcok">
-					 		<img src="//www.itxdd.com/upload/2018-04-16/04c18639b19bfd5927f23dac20d20efe.jpg">
-					 		<p>我是标题dasdasdsadasdsad</p>
-					 		<p class="miaosha_font_price">￥120.00</p>
-					 	</div>
 					 </li>
 				</ul>
 			</div>
 		</div>
 
-		// 底部
+		<!-- // 底部 -->
 		<div class="footbar">
-			<van-tabbar  active-color="#dc0000">
+			<van-tabbar active-color="#dc0000" v-model="active" route>
 			  <van-tabbar-item icon="home-o">商城</van-tabbar-item>
 			  <van-tabbar-item icon="search">服务</van-tabbar-item>
-			  <van-tabbar-item icon="friends-o">我的</van-tabbar-item>
+			  <van-tabbar-item icon="friends-o" to="/user">我的</van-tabbar-item>
 			</van-tabbar>
 		</div>
 	</div>
@@ -225,7 +111,39 @@
 		data(){
 			return{
 				keywords:'',
+				active:0,
+				free_goods_list:[],
+				new_goods_list:[],
+				slide:[],
 			}
+		},
+		methods:{
+			// 获取免单产品
+			get_free_goods:function(){
+				var _this = this;
+				this.$post(this.ROOT_URL + 'ShopApi/goods/get_free_goods',{limit:'6'}).then(function(res){
+					_this.free_goods_list = res.data.list;
+				});
+			},
+			// 获取最新产品
+			get_new_goods:function(){
+				var _this = this;
+				this.$post(this.ROOT_URL + 'ShopApi/goods/get_new_goods',{limit:'12'}).then(function(res){
+					_this.new_goods_list = res.data.list;
+				});
+			},
+			// 获取最新产品
+			get_slide:function(){
+				var _this = this;
+				this.$get(this.ROOT_URL + 'ShopApi/slide/get_slide').then(function(res){
+					_this.slide = res.data.list;
+				});
+			},
+		},
+		mounted(){
+			this.get_free_goods();
+			this.get_new_goods();
+			this.get_slide();
 		},
 	};
 </script>

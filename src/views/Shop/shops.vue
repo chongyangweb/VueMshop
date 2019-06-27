@@ -12,59 +12,22 @@
 		<div class="shops_where">
 			<van-tabs >
 			    <van-tab title="综合排序">
-					<div class="shops_list_info" @click="$router.push({path:'/shop/1'})">
+					<div class="shops_list_info" v-for="v in shop_list" @click="$router.push({path:'/shop/'+v.user_id})">
 						<div class="shops_list_info_left">
-							<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1561278075&di=b3dff61f577cde1d2e7b754891d69ac7&src=http://img5.duitang.com/uploads/item/201303/11/20130311195959_QT3t2.thumb.700_0.jpeg" width="70px" height="70px">
+							<img :src="v.logo" width="70px" height="70px">
 						</div>
 						<div class="shops_list_info_right">
-							<div class="shops_list_info_title">宁乡市圣玛岚琪布艺旗舰店</div>
+							<div class="shops_list_info_title">{{v.title}}</div>
 							<div class="shops_list_info_jl">< &nbsp;&nbsp;距离 160km</div>
-							<div class="shops_list_info_map"><i class="iconfont">&#xeb96;</i>豪德市场V区5栋17-19</div>
+							<div class="shops_list_info_map"><i class="iconfont">&#xeb96;</i>{{v.address}}</div>
 							<div class="shops_pic_lists">
 								<ul>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
+									<li v-for="vo in v.images.split(',')"><img :src="vo" alt=""></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 
-					<div class="shops_list_info">
-						<div class="shops_list_info_left">
-							<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1561278075&di=b3dff61f577cde1d2e7b754891d69ac7&src=http://img5.duitang.com/uploads/item/201303/11/20130311195959_QT3t2.thumb.700_0.jpeg" width="70px" height="70px">
-						</div>
-						<div class="shops_list_info_right">
-							<div class="shops_list_info_title">宁乡市圣玛岚琪布艺旗舰店</div>
-							<div class="shops_list_info_jl">< &nbsp;&nbsp;距离 160km</div>
-							<div class="shops_list_info_map"><i class="iconfont">&#xeb96;</i>豪德市场V区5栋17-19</div>
-							<div class="shops_pic_lists">
-								<ul>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<div class="shops_list_info">
-						<div class="shops_list_info_left">
-							<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1561278075&di=b3dff61f577cde1d2e7b754891d69ac7&src=http://img5.duitang.com/uploads/item/201303/11/20130311195959_QT3t2.thumb.700_0.jpeg" width="70px" height="70px">
-						</div>
-						<div class="shops_list_info_right">
-							<div class="shops_list_info_title">宁乡市圣玛岚琪布艺旗舰店</div>
-							<div class="shops_list_info_jl">< &nbsp;&nbsp;距离 160km</div>
-							<div class="shops_list_info_map"><i class="iconfont">&#xeb96;</i>豪德市场V区5栋17-19</div>
-							<div class="shops_pic_lists">
-								<ul>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-									<li><img src="//www.itxdd.com/upload/2018-03-27/0023c8be414b8d98d0967304a2aeae79.jpeg" alt=""></li>
-								</ul>
-							</div>
-						</div>
-					</div>
 
 
 			    </van-tab>
@@ -79,8 +42,20 @@
 	export default{
 		data(){
 			return{
-
+				shop_list:[],
 			}
+		},
+		methods:{
+			get_shop_list:function(){
+				var province = localStorage.getItem('mshop_province');
+				var _this = this;
+				this.$post(this.ROOT_URL + 'ShopApi/goods/get_shop',{limit:'16',province:province}).then(function(res){
+					_this.shop_list = res.data.list;
+				});
+			},
+		},
+		mounted(){
+			this.get_shop_list();
 		},
 
 	};

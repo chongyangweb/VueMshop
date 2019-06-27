@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { 
 Button,
 Search,
@@ -19,6 +18,7 @@ GoodsActionButton,
 Cell,
 CellGroup,
 Field,
+ActionSheet,
 
 } from 'vant';
 Vue.use(Button);
@@ -40,4 +40,5 @@ Vue.use(GoodsActionButton);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Field);
+Vue.use(ActionSheet);
 
