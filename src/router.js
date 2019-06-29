@@ -13,6 +13,9 @@ const User = () => import ('@/views/User/index.vue') // 用户中心
 const Register = () => import ('@/views/User/register.vue') // 注册
 const Login = () => import ('@/views/User/login.vue') // 登录
 
+// 订单
+const Order = () => import ('@/views/Order/index.vue') // 订单
+
 
 
 export default new VueRouter({
@@ -33,6 +36,9 @@ export default new VueRouter({
     {path: '/user',name: 'user_index',component: User},
     {path: '/user/register',name: 'user_register',component: Register},
     {path: '/user/login',name: 'user_login',component: Login},
+
+    // 订单
+    {path: '/order',name: 'order',component: Order},
     
   ]
 })

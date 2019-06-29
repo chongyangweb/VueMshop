@@ -109,7 +109,7 @@
 </script>
 
 <style>
-.person_bg{background: #dc0000;height: 11rem;}
+.person_bg{background: #07c160/*#dc0000*/;height: 11rem;}
 .person_top:after{content: '';display: block;clear: both;}
 .person_left_arrow .van-icon-arrow-left{color:#fff;font-size: 16px;line-height: 3rem;margin-left: 1rem;float:left;margin-right: 0.4rem;font-weight: normal;}
 .login_left_arrow{color:#fff;line-height: 3.15rem;font-size: 14px;}

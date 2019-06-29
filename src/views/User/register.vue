@@ -3,7 +3,7 @@
 		<div class="login_top">
 			<div class="one_login_top">
 				<van-icon name="arrow-left" />
-				<div class="login_left_arrow">返回</div>
+				<div class="login_left_arrow"  @click="$router.go(-1)">返回</div>
 			</div>
 			<div class="login_top_title">用户注册<p>QINGWU REGISTER</p></div>
 			<!-- <van-nav-bar

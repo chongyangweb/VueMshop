@@ -19,6 +19,12 @@ Cell,
 CellGroup,
 Field,
 ActionSheet,
+Stepper,
+SubmitBar,
+NavBar,
+Card,
+AddressList,
+AddressEdit,
 
 } from 'vant';
 Vue.use(Button);
@@ -41,4 +47,10 @@ Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Field);
 Vue.use(ActionSheet);
+Vue.use(Stepper);
+Vue.use(SubmitBar);
+Vue.use(NavBar);
+Vue.use(Card);
+Vue.use(AddressList);
+Vue.use(AddressEdit);
 
